@@ -1,10 +1,10 @@
-import "./Header.module.css";
+import styles from "./Header.module.css";
 import Logo from "../../../assets/svgs/logo.svg";
 export default function Header() {
   return (
-    <header className="header">
-      <img src={Logo} className="logo" />
-      <h1 className="header-title">PetBlog</h1>
+    <header className={styles.header}>
+      <img src={Logo} className={styles.logo} />
+      <h1 className={styles.headerTitle}>PetBlog</h1>
     </header>
   );
 }
