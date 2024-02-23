@@ -1,0 +1,16 @@
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.label {
+    color: white;
+    font-weight: 700;
+}
+
+.input {
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, .15);
+}

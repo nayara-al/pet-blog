@@ -1,6 +1,26 @@
 @font-face {
     font-family: 'Pacifico';
-    src: url('../assets/fonts/Pacifico-Regular.ttf');
+    src: local('Pacifico'), url('../assets/fonts/Pacifico-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoRegular';
+    src: local('RobotoRegular'), url('../assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoBlack';
+    src: local('RobotoBlack'), url('../assets/fonts/Roboto/Roboto-Black.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoBold';
+    src: local('RobotoBold'), url('../assets/fonts/Roboto/Roboto-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoLight';
+    src: local('RobotoLight'), url('../assets/fonts/Roboto/Roboto-Light.ttf');
 }
 
 * {
@@ -19,5 +39,5 @@
 
 html {
     background-color: var(--bege);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: RobotoRegular, Verdana, Tahoma, sans-serif;
 }

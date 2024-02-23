@@ -6,6 +6,8 @@ function Routes() {
     <RRDRoutes>
       <Route path="/" element={<Page.Home />}/>
       <Route path="/about" element={<Page.About/>}/>
+      <Route path="/login" element={<Page.Login/>}/>
+      <Route path="/cadastro" element={<Page.Register/>}/>
     </RRDRoutes>
   );
 }

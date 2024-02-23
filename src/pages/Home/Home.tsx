@@ -1,5 +1,9 @@
+import PostUnit from "../../components/Post";
+
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <PostUnit/>
+    </div>
   )
 }
