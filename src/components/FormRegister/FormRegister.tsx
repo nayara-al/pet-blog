@@ -1,6 +1,7 @@
 import { PawPrint } from "@phosphor-icons/react";
 import style from "./FormRegister.module.css";
-import FormField from "../FormFieldText/FormField";
+import * as Component from "../index"
+
 export default function FormRegister() {
   return (
     <div>
@@ -11,8 +12,23 @@ export default function FormRegister() {
         </div>
         <h2></h2>
         <div className={style.formFields}>
-          <FormField id="name" label="Nome" placeholder="Qual seu nome?"/>
-          <FormField id="email" label="E-mail" placeholder="Informe seu e-mail"/>
+          <Component.FormField id="name" label="Nome" placeholder="Qual seu nome?" />
+          <Component.FormField
+            id="email"
+            label="E-mail"
+            placeholder="Informe seu e-mail"
+          />
+          <Component.FormField
+            id="password"
+            label="Senha"
+            placeholder="Escolha uma senha"
+          />
+          <Component.FormField
+            id="repeatPassword"
+            label="Repetir senha"
+            placeholder="Repita a senha escolhida"
+          />
+          <Component.Button buttonType="secondary">Cadastrar</Component.Button>
         </div>
       </form>
     </div>

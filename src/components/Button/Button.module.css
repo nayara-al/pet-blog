@@ -1,0 +1,17 @@
+.btnPrimary, .btnSecondary {
+    font-family: RobotoBlack;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 0.5rem 0.25rem;
+}
+
+.btnPrimary {
+    background-color: var(--azul-escuro);
+    color: white;
+}
+
+.btnSecondary {
+    background-color: var(--laranja);
+    color: white;
+}
