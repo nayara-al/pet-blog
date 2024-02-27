@@ -12,26 +12,26 @@ export default function FormRegister() {
         </div>
         <h2></h2>
         <div className={style.formFields}>
-          <Component.FormField
+          <Component.FormFieldText
             id="name"
             label="Nome"
             placeholder="Qual seu nome?"
             required
           />
-          <Component.FormField
+          <Component.FormFieldText
             id="email"
             label="E-mail"
             placeholder="Informe seu e-mail"
             required
           />
-          <Component.FormField
+          <Component.FormFieldText
             id="password"
             label="Senha"
             placeholder="Escolha uma senha"
             required
             type="password"
           />
-          <Component.FormField
+          <Component.FormFieldText
             id="repeatPassword"
             label="Confirmação de senha"
             placeholder="Confirme sua senha"
