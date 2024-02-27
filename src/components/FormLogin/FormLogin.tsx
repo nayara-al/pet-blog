@@ -12,13 +12,13 @@ export default function FormLogin() {
         </div>
         <h2></h2>
         <div className={style.formFields}>
-          <Component.FormField
+          <Component.FormFieldText
             id="email"
             label="E-mail"
             placeholder="Informe seu e-mail"
             required
           />
-          <Component.FormField
+          <Component.FormFieldText
             id="password"
             label="Senha"
             placeholder="Escolha uma senha"
