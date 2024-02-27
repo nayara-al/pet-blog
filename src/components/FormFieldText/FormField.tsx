@@ -1,6 +1,7 @@
+import { InputHTMLAttributes } from "react";
 import style from "./FormField.module.css";
 
-interface FormFieldProps {
+interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
   placeholder: string;
