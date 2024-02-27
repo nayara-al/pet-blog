@@ -1,5 +1,6 @@
 import Button from "./Button/Button";
-import FormField from "./FormFieldText/FormField";
+import FormFieldText from "./FormFieldText/FormFieldText";
+import FormLogin from "./FormLogin/FormLogin";
 import FormRegister from "./FormRegister/FormRegister";
 import Footer from "./Layout/Footer";
 import Header from "./Layout/Header";
@@ -8,10 +9,11 @@ import StructurePage from "./StructurePage";
 
 export {
     Button,
-    FormField,
+    FormFieldText,
     FormRegister,
     Footer,
     Header,
     PostUnit,
-    StructurePage
+    StructurePage,
+    FormLogin
 }
