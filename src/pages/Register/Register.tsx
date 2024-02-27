@@ -1,9 +1,9 @@
-import FormRegister from "../../components/FormRegister/FormRegister";
+import { FormRegister } from "../../components";
 
 export default function Register() {
   return (
-    <div>
+    <>
       <FormRegister/>
-    </div>
+    </>
   )
 }
