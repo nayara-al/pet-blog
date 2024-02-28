@@ -1,17 +1,20 @@
-import { BrowserRouter } from "react-router-dom";
-import Routes from "./routes";
-import Header from "./components/Layout/Header";
-import Footer from "./components/Layout/Footer";
-import StructurePage from "./components/StructurePage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import * as Component from "./components";
+import { Home, About, Login, Register } from "./pages";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <StructurePage>
-        <Routes />
-      </StructurePage>
-      <Footer />
+      <Component.Header />
+      <Component.StructurePage>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
+        </Routes>
+      </Component.StructurePage>
+      <Component.Footer />
     </BrowserRouter>
   );
 }

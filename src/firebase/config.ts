@@ -1,19 +1,17 @@
-//perguntar aula 124 sobre variáveis de ambiente do firebase config
-
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDi3PZH7glPcB50KgrJzvRPV3TvLxa7ccY",
-  authDomain: "pet-blog-4d857.firebaseapp.com",
-  projectId: "pet-blog-4d857",
-  storageBucket: "pet-blog-4d857.appspot.com",
-  messagingSenderId: "140694633116",
-  appId: "1:140694633116:web:27741526dee827a3e1cb59",
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-
-export { db };
+export const auth = getAuth(app);
+export const db = getFirestore(app);

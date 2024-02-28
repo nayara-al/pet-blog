@@ -1,7 +1,7 @@
 import { PawPrint } from "@phosphor-icons/react";
 import style from "./FormRegister.module.css";
 import * as Component from "../index";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function FormRegister() {
   const [name, setName] = useState<string>("");
@@ -10,32 +10,23 @@ export default function FormRegister() {
   const [repeatePassword, setRepeatePassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const handleRegister = (e: FormEvent) => {
+  const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
 
-    /* const user = {
-      displayName,
+    const user = {
+      name,
       email,
       password,
-    }; */
+    };
 
     if (password !== repeatePassword) {
       setError("As senhas precisam ser iguais.");
       return;
     }
 
-    //const res = await createUser(user);
-
-    console.log(name, email, password, repeatePassword);
-    //console.log(res);
+    console.log(user);
   };
-
-  useEffect(() => {
-    if (authError) {
-      setError(authError);
-    }
-  }, [authError]);
 
   return (
     <div className={style.container}>
@@ -82,6 +73,7 @@ export default function FormRegister() {
           />
           <Component.Button buttonType="secondary">Cadastrar</Component.Button>
         </div>
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );

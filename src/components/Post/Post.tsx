@@ -4,7 +4,7 @@ export default function PostUnit() {
     <div className={style.containerPost}>
       <div className={style.imagePost}>a</div>
       {/* <img src='' alt=''/> */}
-      <p className={style.paragraph}>User</p>
+      <p className={style.paragraph}>Post #1</p>
     </div>
   );
 }
