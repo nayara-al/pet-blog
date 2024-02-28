@@ -1,3 +1,20 @@
 .paragraph {
     font-family: RobotoBlack;
 }
+
+.containerPost {
+    background-color: white;
+    padding: 2rem;
+    border: 0.1rem solid gray;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, .15);
+}
+
+.imagePost {
+    width: 100%;
+    max-width: 25rem;
+    height: 100%;
+    max-height: 20rem;
+    background-color: gray;
+    border-radius: .5rem;
+}
