@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    color: var(--marrom);
+}
+
+.brandTitle {
+    font-family: Pacifico, cursive;
+    color: var(--laranja);
+}
+
+.linkCreate {
+    text-decoration: none;
+    color: var(--laranja);
+    font-weight: 700;
+    font-size: 1.25rem;
+    background-color: var(--azul-escuro);
+    padding: .75rem 2rem;
+    border: 1px solid var(--azul-claro);
+    border-radius: 1rem;
+    box-shadow: 0.1rem 0.1rem 0.1rem rgb(0, 0, 0, .15);
+}
+
+.linkCreate:hover {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.paragraph {
+    max-width: 30rem;
+    font-size: 1.5rem;
+}
+
+.title {
+    font-size: 2rem;
+}

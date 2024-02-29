@@ -2,7 +2,7 @@
     width: 100%;
     height: 4rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #445E6B;
     text-align: center;
@@ -18,4 +18,59 @@
     font-size: 1.5rem;
     color: #fff;
     font-family: Pacifico, cursive;
+}
+
+.petBlogContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.linkHeader {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.linkHeader:hover {
+    color: var(--azul-claro);
+    font-weight: 600;
+}
+
+.menuHeaderDesktop {
+    margin-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
+}
+
+.menuHeaderMobile {
+    position: relative;
+    padding: 0 4rem;
+    background-color: var(--laranja);
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+}
+
+.linkHeaderMobile
+
+.buttonHeader {
+    background-color: transparent;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+.buttonHeader:hover {
+    color: var(--azul-claro);
+    font-weight: 600;
+    cursor: pointer;
 }
