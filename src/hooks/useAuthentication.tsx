@@ -8,6 +8,9 @@ import {
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { IUser } from "../interface/user";
+import { db } from "../firebase/config";
+ 
+console.log(db);
 
 export const useAuthentication = () => {
   const [error, setError] = useState<string | null>(null);

@@ -29,9 +29,11 @@ export default function FormRegister() {
     }
 
     console.log(user);
-    const res = await createUser(user);
-
-    console.log(res);
+    try {
+      await createUser(user);
+    } catch {
+      setError("Algo deu errado, tente novamente mais tarde.");
+    }
   };
 
   useEffect(() => {
