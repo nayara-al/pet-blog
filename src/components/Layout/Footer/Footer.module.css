@@ -7,11 +7,16 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    left: 0;
-    width: 4rem;
-    height: calc(100vh - 4rem);
-    flex-direction: column;
+  margin-bottom: 0; /* Remove a margem inferior padrão */
+  z-index: 1000; /* Certifique-se de que o z-index seja maior que o z-index do StructurePage */
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+      position: fixed;
+      left: 0;
+      width: 4rem;
+      height: calc(100vh - 4rem);
+      flex-direction: column;
   }
 }

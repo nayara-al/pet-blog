@@ -10,7 +10,7 @@ export default function Footer() {
       <Link to="/about">
         <User size={40} color="white" weight="fill" />
       </Link>
-      <Link to="/novo-post">
+      <Link to="/criar-post">
         <PlusSquare size={40} color="white" weight="fill" />
       </Link>
       <Link to="/login">

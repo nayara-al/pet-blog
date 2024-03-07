@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+import styles from "./Header.module.css"
 import Logo from "../../../assets/svgs/logo.svg";
 import { Link } from "react-router-dom";
 export default function Header() {
@@ -19,9 +19,9 @@ export default function Header() {
             Pesquisar
           </Link>
         </li>
-        <li>
-          <button className={styles.buttonHeader}>
-            Sair
+        <li className={styles.itemList}>
+          <button className={styles.btnHeader}>
+            <p className={styles.btnParagraph}>Sair</p>
           </button>
         </li>
       </ul>
@@ -37,7 +37,7 @@ export default function Header() {
           </Link>
         </li>
         <li>
-          <button className={styles.buttonHeader}>
+          <button className={styles.btnHeader}>
             Sair
           </button>
         </li>

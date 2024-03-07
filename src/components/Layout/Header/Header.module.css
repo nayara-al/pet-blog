@@ -6,6 +6,9 @@
     align-items: center;
     background-color: #445E6B;
     text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000; /* Certifique-se de que o z-index seja maior que o z-index do StructurePage */
 }
 
 .logo {
@@ -39,6 +42,7 @@
 }
 
 .menuHeaderDesktop {
+    background-color: transparent;
     margin-right: 2rem;
     display: flex;
     justify-content: center;
@@ -54,6 +58,8 @@
     position: relative;
     padding: 0 4rem;
     background-color: var(--laranja);
+    list-style: none;
+    color: #fff;
     @media screen and (min-width: 768px) {
         display: none;
     }
@@ -61,16 +67,35 @@
 
 .linkHeaderMobile
 
-.buttonHeader {
-    background-color: transparent;
+.btnHeader {
+    background-color: var(--azul-escuro);
+    border: none;
+    color: #fff; 
     text-decoration: none;
-    color: white;
+    transition: color 0.3s ease;
+}
+
+.btnParagraph {
+    background-color: var(--azul-escuro);
+    border: none;
+    color: #fff; 
+    text-decoration: none;
     transition: color 0.3s ease;
     font-size: 1rem;
 }
 
-.buttonHeader:hover {
+.btnHeader:hover {
     color: var(--azul-claro);
     font-weight: 600;
     cursor: pointer;
+}
+
+.btnParagraph:hover {
+    color: var(--azul-claro);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.itemList {
+    background-color: var(--azul-escuro);
 }
