@@ -1,7 +1,8 @@
 import { PawPrint } from "@phosphor-icons/react";
 import style from "./FormRegister.module.css";
 import * as Component from "../index";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 export default function FormRegister() {
   const [name, setName] = useState<string>("");
@@ -9,6 +10,8 @@ export default function FormRegister() {
   const [password, setPassword] = useState<string>("");
   const [repeatePassword, setRepeatePassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const { createUser, error: authError, loading } = useAuthentication();
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
@@ -26,7 +29,16 @@ export default function FormRegister() {
     }
 
     console.log(user);
+    const res = await createUser(user);
+
+    console.log(res);
   };
+
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
 
   return (
     <div className={style.container}>
@@ -71,9 +83,19 @@ export default function FormRegister() {
             value={repeatePassword}
             onChange={(event) => setRepeatePassword(event.target.value)}
           />
-          <Component.Button buttonType="secondary">Cadastrar</Component.Button>
+          {!loading && (
+            <Component.Button buttonType="secondary">
+              Cadastrar
+            </Component.Button>
+          )}
+          {loading && (
+            <Component.Button buttonType="secondary" disabled>
+              Aguarde...
+            </Component.Button>
+          )}
+
+          {error && <p className="error">{error}</p>}
         </div>
-        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );
