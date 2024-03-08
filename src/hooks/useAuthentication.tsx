@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from "react";
+import { IUser } from "../interface/user";
+import { db } from "../firebase/config";
+
+console.log(db)
+
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
+  getAuth,
 } from "firebase/auth";
-import { useState, useEffect } from "react";
-import { IUser } from "../interface/user";
-import { db } from "../firebase/config";
- 
-console.log(db);
+
+export type FirebaseUser = {
+  uid: string
+  displayName: string
+  email: string
+};
 
 export const useAuthentication = () => {
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +25,15 @@ export const useAuthentication = () => {
   const [cancelled, setCancelled] = useState<boolean>(false);
 
   const auth = getAuth();
+
+  const ERRORS_MESSAGES = {
+    Password: "Senha fraca, minimo 6 caracteres.",
+    "email-already": "Email ja cadastrado.",
+    "user-not-found": "Usuário não encontrado.",
+    "wrong-password": "Senha incorreta.",
+    "too-many-requests": "Acesso a conta temporariamente desabilitado.",
+    default: "Erro no sistema ,tente mais tarde.",
+  };
 
   function checkIfIsCancelled() {
     if (cancelled) {
@@ -27,36 +43,28 @@ export const useAuthentication = () => {
 
   const createUser = async (data: IUser) => {
     checkIfIsCancelled();
-    setLoading(true);
 
+    setError(null);
+    setLoading(true);
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
-        data.email,
-        data.password
+        data!.email,
+        data!.password
       );
-
-      await updateProfile(user, {
-        displayName: data.name,
-      });
-
+      await updateProfile(user, { displayName: data.literalName });
+      setLoading(false);
       return user;
     } catch (error: any) {
       console.log(error.message);
-      console.log(typeof error.message);
 
-      let systemErrorMessage;
+      const SystemError = Object.entries(ERRORS_MESSAGES).find((msg) =>
+        error.message.includes(msg[0])
+      )!;
 
-      if (error.message.include("Passaword")) {
-        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres";
-      } else if (error.message.include("email-already")) {
-        systemErrorMessage = "E-mail já cadastrado.";
-      } else {
-        systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
-      }
-      setError(systemErrorMessage);
+      setError(SystemError[1]);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const logout = () => {
@@ -74,24 +82,24 @@ export const useAuthentication = () => {
     } catch (error: any){
       console.log(error.message);
       console.log(typeof error.message);
-      console.log(error.message.includes("user-not"));
 
-      let systemErrorMessage;
+      let systemErrorMessage: string;
 
-      if (error.message.includes("user-not-found")) {
-        systemErrorMessage = "Usuário não encontrado.";
-      } else if (error.message.includes("wrong-password")) {
-        systemErrorMessage = "Senha incorreta.";
-      } else {
-        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
+      switch (error.code) {
+        case "auth/user-not-found":
+          systemErrorMessage = "Usuário não encontrado.";
+          break;
+        case "auth/wrong-password":
+          systemErrorMessage = "Senha incorreta.";
+          break;
+        default:
+          systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
       }
 
       console.log(systemErrorMessage);
 
       setError(systemErrorMessage);
     }
-
-    console.log(error);
 
     setLoading(false);
   };

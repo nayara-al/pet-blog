@@ -55,17 +55,11 @@
 }
 
 .menuHeaderMobile {
-    position: relative;
-    padding: 0 4rem;
-    background-color: var(--laranja);
-    list-style: none;
-    color: #fff;
+    
     @media screen and (min-width: 768px) {
         display: none;
     }
 }
-
-.linkHeaderMobile
 
 .btnHeader {
     background-color: var(--azul-escuro);

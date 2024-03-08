@@ -1,24 +1,28 @@
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
-import { House, User, SignIn, PawPrint, PlusSquare } from "@phosphor-icons/react";
+import { House, User, PlusSquare } from "@phosphor-icons/react";
+import { useAuthentication } from "../../../hooks/useAuthentication";
 export default function Footer() {
+  const { auth } = useAuthentication();
+  const isAuthenticated = (): boolean => {
+    const user = auth.currentUser;
+    return !!user;
+  };
   return (
-    <footer className={styles.footer}>
-      <Link to="/">
-        <House size={40} color="white" weight="fill" />
-      </Link>
-      <Link to="/about">
-        <User size={40} color="white" weight="fill" />
-      </Link>
-      <Link to="/criar-post">
-        <PlusSquare size={40} color="white" weight="fill" />
-      </Link>
-      <Link to="/login">
-        <SignIn size={40} color="white" weight="fill" />
-      </Link>
-      <Link to="/cadastro">
-        <PawPrint size={40} color="white" weight="fill" />
-      </Link>
-    </footer>
+    <>
+      {isAuthenticated() ? (
+        <footer className={styles.footer}>
+          <Link to="/">
+            <House size={40} color="white" weight="fill" />
+          </Link>
+          <Link to="/about">
+            <User size={40} color="white" weight="fill" />
+          </Link>
+          <Link to="/criar-post">
+            <PlusSquare size={40} color="white" weight="fill" />
+          </Link>
+        </footer>
+      ) : null}
+    </>
   );
 }
