@@ -4,4 +4,10 @@ interface IUser {
   password: string
 }
 
+export const initialValue: IUser = {
+  literalName: "",
+  email: "",
+  password: "",
+};
+
 export type { IUser };

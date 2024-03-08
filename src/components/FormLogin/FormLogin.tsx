@@ -1,28 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PawPrint } from "@phosphor-icons/react";
 import style from "./FormLogin.module.css";
 import * as Component from "../index";
 import { useAuthentication } from "../../hooks/useAuthentication";
-import { FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { IUser, initialValue } from "../../interface/user";
+import { useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [userLogin, setUserLogin] = useState<IUser>(initialValue);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate()
+
   const { login, error: authError, loading } = useAuthentication();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserLogin((previewValue: any) => ({
+      ...previewValue,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     setError("");
 
-    const user = {
-      email,
-      password,
-    };
+    try {
+      await login(userLogin);
+      navigate("/home")
 
-    const res = await login(user);
-
-    console.log(res);
+    } catch(error) {
+      console.error(error)
+    }
   };
   useEffect(() => {
     console.log(authError);
@@ -44,18 +54,16 @@ export default function FormLogin() {
             label="E-mail"
             placeholder="Informe seu e-mail"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
+            onChange={handleChange}
           />
           <Component.FormFieldText
             id="password"
             label="Senha"
             placeholder="Escolha uma senha"
             required
+            onChange={handleChange}
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
           />
 
           {!loading && (
