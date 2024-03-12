@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CreatePost.module.css";
 import { Button, FormFieldText } from "../../components";
 import { Trash } from "@phosphor-icons/react";
+import { useInsertData } from "../../hooks/useInsertData";
+import { useAuthValue } from "../../context/useAuthContext";
 
 export default function CreatePost() {
   const [title, setTitle] = useState<string>("");
@@ -11,25 +13,23 @@ export default function CreatePost() {
   const [tags, setTags] = useState<string>("");
   const [formError, setFormError] = useState<string>("");
 
-  //const { user } = useAuthValue();
+  const { user } = useAuthValue();
+
   const navigate = useNavigate();
 
-  //const { insertDocument, response } = useInsertDocument("posts");
+  const { insertDocument, response } = useInsertData("posts");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError("");
 
-    // validate image
     if (!imageFile) {
       setFormError("Selecione uma imagem para enviar.");
       return;
     }
 
-    // create tags array
     const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
-    // check values
     if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
     }
@@ -46,22 +46,20 @@ export default function CreatePost() {
       title,
       body,
       tags: tagsArray,
-      //uid: user.uid,
-      //createdBy: user.displayName,
+      uid: user?.uid,
+      createdBy: user?.displayName,
     });
 
     if (formError) return;
 
-    /* insertDocument({
-        title,
-        image,
-        body,
-        tags: tagsArray,
-        uid: user.uid,
-        createdBy: user.displayName,
-      });
-   */
-    // redirect to home page
+    insertDocument({
+      title,
+      body,
+      tags: tagsArray,
+      uid: user?.uid,
+      createdBy: user?.displayName,
+    });
+
     navigate("/");
   };
 
@@ -119,7 +117,6 @@ export default function CreatePost() {
         />
         <Button buttonType="primary">Criar post!</Button>
       </form>
-
     </div>
   );
 }

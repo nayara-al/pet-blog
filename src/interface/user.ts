@@ -1,13 +1,15 @@
 interface IUser {
-  literalName: string;
+  displayName?: string;
   email: string;
   password: string
+  confirmPassword?: string
 }
 
 export const initialValue: IUser = {
-  literalName: "",
+  displayName: "",
   email: "",
   password: "",
+  confirmPassword: ""
 };
 
 export type { IUser };

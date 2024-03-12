@@ -11,7 +11,7 @@ export default function FormFieldText({ id, label, placeholder, ...props }: Form
   return (
     <div className={style.formField}>
       <label htmlFor={id} className={style.label}>{label}:</label>
-      <input className={style.input} placeholder={placeholder} required id={id} {...props} />
+      <input className={style.input} placeholder={placeholder} required id={id} {...props} name={id}/>
     </div>
   );
 }

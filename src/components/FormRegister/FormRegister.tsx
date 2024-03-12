@@ -1,36 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { PawPrint } from "@phosphor-icons/react";
 import style from "./FormRegister.module.css";
 import * as Component from "../index";
-import { FormEvent, useEffect, useState } from "react";
 import { useAuthentication } from "../../hooks/useAuthentication";
+import { IUser, initialValue } from "../../interface/user";
+import { useNavigate } from "react-router-dom";
 
 export default function FormRegister() {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [repeatePassword, setRepeatePassword] = useState<string>("");
+  const [userRegister, setUserRegister] = useState<IUser>(initialValue);
   const [error, setError] = useState<string>("");
+  const navigate = useNavigate()
 
   const { createUser, error: authError, loading } = useAuthentication();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserRegister((previewValue: any) => ({
+      ...previewValue,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const user = {
-      name,
-      email,
-      password,
-    };
-
-    if (password !== repeatePassword) {
-      setError("As senhas precisam ser iguais.");
-      return;
+    if (userRegister.password !== userRegister.confirmPassword) {
+      setError("As senhas não conferem");
     }
 
-    console.log(user);
+    console.log(userRegister);
     try {
-      await createUser(user);
+      await createUser(userRegister);
+      navigate("/login")
     } catch {
       setError("Algo deu errado, tente novamente mais tarde.");
     }
@@ -52,19 +54,17 @@ export default function FormRegister() {
         <h2></h2>
         <div className={style.formFields}>
           <Component.FormFieldText
-            id="name"
+            id="displayName"
             label="Nome"
             placeholder="Qual seu nome?"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={handleChange}
             required
           />
           <Component.FormFieldText
             id="email"
             label="E-mail"
             placeholder="Informe seu e-mail"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={handleChange}
             required
           />
           <Component.FormFieldText
@@ -73,17 +73,15 @@ export default function FormRegister() {
             placeholder="Escolha uma senha"
             required
             type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={handleChange}
           />
           <Component.FormFieldText
-            id="repeatPassword"
+            id="confirmPassword"
             label="Confirmação de senha"
             placeholder="Confirme sua senha"
             required
             type="password"
-            value={repeatePassword}
-            onChange={(event) => setRepeatePassword(event.target.value)}
+            onChange={handleChange}
           />
           {!loading && (
             <Component.Button buttonType="secondary">

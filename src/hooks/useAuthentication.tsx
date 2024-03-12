@@ -52,7 +52,7 @@ export const useAuthentication = () => {
         data!.email,
         data!.password
       );
-      await updateProfile(user, { displayName: data.literalName });
+      await updateProfile(user, { displayName: data.displayName });
       setLoading(false);
       return user;
     } catch (error: any) {
