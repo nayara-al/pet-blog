@@ -42,22 +42,15 @@ export default function CreatePost() {
 
     console.log(tagsArray);
 
-    console.log({
-      title,
-      body,
-      tags: tagsArray,
-      uid: user?.uid,
-      createdBy: user?.displayName,
-    });
-
     if (formError) return;
 
     insertDocument({
       title,
       body,
       tags: tagsArray,
-      uid: user?.uid,
-      createdBy: user?.displayName,
+      createdBy: user!.displayName as string,
+      image: imageFile,
+      uid: user!.uid,
     });
 
     navigate("/");
@@ -115,7 +108,15 @@ export default function CreatePost() {
           label="Tags"
           placeholder="Tags separadas por vírgula"
         />
-        <Button buttonType="primary">Criar post!</Button>
+        {!response.loading && <Button buttonType="primary">Criar post!</Button>}
+        {response.loading && (
+          <Button buttonType="primary" disabled>
+            aguarde...
+          </Button>
+        )}
+        {(response.error || formError) && (
+          <p className="error">{response.error || formError}</p>
+        )}
       </form>
     </div>
   );
