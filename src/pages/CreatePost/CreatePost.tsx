@@ -4,7 +4,7 @@ import styles from "./CreatePost.module.css";
 import { Button, FormFieldText } from "../../components";
 import { Trash } from "@phosphor-icons/react";
 import { useInsertData } from "../../hooks/useInsertData";
-import { useAuthValue } from "../../context/useAuthContext";
+import { useAuthContext } from "../../context/useAuthContext";
 
 export default function CreatePost() {
   const [title, setTitle] = useState<string>("");
@@ -13,7 +13,7 @@ export default function CreatePost() {
   const [tags, setTags] = useState<string>("");
   const [formError, setFormError] = useState<string>("");
 
-  const { user } = useAuthValue();
+  const { user } = useAuthContext();
 
   const navigate = useNavigate();
 

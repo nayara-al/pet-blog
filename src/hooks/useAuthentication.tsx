@@ -1,30 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { IUser } from "../interface/user";
-import { db } from "../firebase/config";
+import { db, auth } from "../firebase/config";
 
-console.log(db)
+console.log(db);
 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
   signOut,
-  getAuth,
 } from "firebase/auth";
 
 export type FirebaseUser = {
-  uid: string
-  displayName: string
-  email: string
+  uid: string;
+  displayName: string;
+  email: string;
 };
 
 export const useAuthentication = () => {
+  const [user, setUser] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [cancelled, setCancelled] = useState<boolean>(false);
-
-  const auth = getAuth();
 
   const ERRORS_MESSAGES = {
     Password: "Senha fraca, minimo 6 caracteres.",
@@ -47,13 +44,11 @@ export const useAuthentication = () => {
     setError(null);
     setLoading(true);
     try {
-      const { user } = await createUserWithEmailAndPassword(
+      const user = await createUserWithEmailAndPassword(
         auth,
         data!.email,
         data!.password
       );
-      await updateProfile(user, { displayName: data.displayName });
-      setLoading(false);
       return user;
     } catch (error: any) {
       console.log(error.message);
@@ -78,8 +73,15 @@ export const useAuthentication = () => {
     setError(null);
 
     try {
-      await signInWithEmailAndPassword(auth, data!.email, data!.password);
-    } catch (error: any){
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data!.email,
+        data!.password
+      );
+      setUser(userCredential.user);
+      setLoading(false);
+      return;
+    } catch (error: any) {
       console.log(error.message);
 
       let systemErrorMessage: string;
@@ -108,6 +110,7 @@ export const useAuthentication = () => {
   }, []);
 
   return {
+    user,
     auth,
     createUser,
     error,

@@ -5,13 +5,13 @@ import * as Component from "../index";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IUser, initialValue } from "../../interface/user";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
   const [userLogin, setUserLogin] = useState<IUser>(initialValue);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   const { login, error: authError, loading } = useAuthentication();
 
@@ -22,14 +22,12 @@ export default function FormLogin() {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
     try {
       await login(userLogin);
-      navigate("/home")
-
     } catch(error) {
       console.error(error)
     }
