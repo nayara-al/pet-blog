@@ -4,6 +4,10 @@ import styles from "./CreatePost.module.css";
 import { Button, FormFieldText } from "../../components";
 import { Trash } from "@phosphor-icons/react";
 import { useInsertData } from "../../hooks/useInsertData";
+import { useAuthValue } from "../../context/AuthContext";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase/config";
+
 
 export default function CreatePost() {
   const [title, setTitle] = useState<string>("");
@@ -11,13 +15,13 @@ export default function CreatePost() {
   const [body, setBody] = useState<string>("");
   const [tags, setTags] = useState<string>("");
   const [formError, setFormError] = useState<string>("");
-
+  const { user } = useAuthValue();
 
   const navigate = useNavigate();
 
   const { insertDocument, response } = useInsertData("posts");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError("");
 
@@ -30,28 +34,30 @@ export default function CreatePost() {
 
     if (!title || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
+      return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("image", imageFile);
-    formData.append("body", body);
-    formData.append("tags", JSON.stringify(tagsArray));
+    try {
+      const storageRef = ref(storage, `images/${imageFile.name}`);
+      await uploadBytes(storageRef, imageFile);
+      const imageUrl = await getDownloadURL(storageRef);
 
-    console.log(tagsArray);
+      insertDocument({
+        title,
+        body,
+        tags: tagsArray,
+        createdBy: user!.displayName as string,
+        imageUrl,
+        uid: user!.uid,
+      });
 
-    if (formError) return;
-
-    insertDocument({
-      title,
-      body,
-      tags: tagsArray,
-      createdBy: user?.displayName as string,
-      image: imageFile,
-      uid: user!.uid,
-    });
-
-    navigate("/");
+      navigate("/");
+    } catch (error) {
+      console.error("Erro ao fazer upload da imagem:", error);
+      setFormError(
+        "Ocorreu um erro ao enviar a imagem. Por favor, tente novamente."
+      );
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IDocument {
     title: string,
-    image: File
+    imageUrl: string;
     body: string;
     uid: string;
     createdBy: string;
