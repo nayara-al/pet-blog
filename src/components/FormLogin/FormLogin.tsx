@@ -5,13 +5,10 @@ import * as Component from "../index";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IUser, initialValue } from "../../interface/user";
-//import { useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
   const [userLogin, setUserLogin] = useState<IUser>(initialValue);
   const [error, setError] = useState("");
-
-  //const navigate = useNavigate()
 
   const { login, error: authError, loading } = useAuthentication();
 

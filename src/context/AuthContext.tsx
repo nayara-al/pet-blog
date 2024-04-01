@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, createContext, ReactNode } from "react";
 import { IContext, initialValueContext } from "../interface/context";
 
@@ -12,7 +13,8 @@ export function AuthProvider({ children, value }: AuthProps) {
   return (
     <AuthContext.Provider value={value}>
     {children}
-    </AuthContext.Provider>);
+    </AuthContext.Provider>
+    );
 }
 
 export function useAuthValue() {

@@ -1,16 +1,36 @@
 import { BrowserRouter } from "react-router-dom";
 import * as Component from "./components";
 import { Routes } from "./routes";
+import { AuthProvider } from "./context/AuthContext";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { useAuthentication } from "./hooks/useAuthentication";
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const { auth } = useAuthentication();
+
+  const loadingUser = user === null;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
+  if (loadingUser) {
+    return <p>Carregando...</p>;
+  }
   return (
-    <BrowserRouter>
-      <Component.Header />
-      <Component.StructurePage>
-        <Routes />
-      </Component.StructurePage>
-      <Component.Footer />
-    </BrowserRouter>
+    <AuthProvider value={{ user }}>
+      <BrowserRouter>
+        <Component.Header />
+        <Component.StructurePage>
+          <Routes />
+        </Component.StructurePage>
+        <Component.Footer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -1,17 +1,15 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthentication } from "../hooks/useAuthentication";
+
 
 export default function PrivateRoutes() {
-  const auth = getAuth();
-  const [user, loading] = useAuthState(auth);
-  const location = useLocation();
+  const { auth } = useAuthentication();
+  const isAuthenticated = (): boolean => {
+    const user = auth.currentUser;
+    return !!user;
+  };
 
-  if (loading) {
-    return <div>...Loading</div>;
-  }
-
-  return user ? (
+  return isAuthenticated() ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} />
