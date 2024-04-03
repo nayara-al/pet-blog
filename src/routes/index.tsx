@@ -17,6 +17,7 @@ export function Routes() {
         <Route path="/home" element={<Page.Home />} />
         <Route path="/about" element={<Page.About />} />
         <Route path="/criar-post" element={<Page.CreatePost />} />
+        <Route path="/search" element={<Page.Search/>}/>
       </Route>
     </RRDRoutes>
   );
