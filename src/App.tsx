@@ -10,17 +10,12 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
   const { auth } = useAuthentication();
 
-  const loadingUser = user === null;
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
   }, [auth]);
-
-  if (loadingUser) {
-    return <p>Carregando...</p>;
-  }
+ 
   return (
     <AuthProvider value={{ user }}>
       <BrowserRouter>
