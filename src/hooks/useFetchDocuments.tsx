@@ -9,7 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 
-export const useFetchDocuments = (docCollection: string, search = null, uid = null) => {
+export const useFetchDocuments = (docCollection: string, search: string | null = null, uid = null) => {
   const [documents, setDocuments] = useState<any[]>([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);

@@ -5,6 +5,7 @@ import FormRegister from "./FormRegister/FormRegister";
 import Footer from "./Layout/Footer";
 import Header from "./Layout/Header";
 import StructurePage from "./StructurePage";
+import PostDetail from "./Post/PostDetail";
 
 export {
     Button,
@@ -13,5 +14,6 @@ export {
     Footer,
     Header,
     StructurePage,
-    FormLogin
+    FormLogin,
+    PostDetail
 }
