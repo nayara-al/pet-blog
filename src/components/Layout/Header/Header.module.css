@@ -49,9 +49,6 @@
     align-items: center;
     gap: 1rem;
     list-style: none;
-    @media screen and (max-width: 767px) {
-        display: none;
-    }
 }
 
 .menuHeaderMobile {
