@@ -4,6 +4,10 @@
     gap: 2rem;
 }
 
+.title {
+    text-align: center;
+}
+
 .search_form {
     display: flex;
     align-items: end;

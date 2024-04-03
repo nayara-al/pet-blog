@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
+import { db } from "../firebase/config";
 import {
   collection,
   query,
@@ -7,33 +8,43 @@ import {
   onSnapshot,
   where,
 } from "firebase/firestore";
-import { db } from "../firebase/config";
 
-export const useFetchDocuments = (
-  docCollection: string,
-  search = null,
-  uid = null
-) => {
+export const useFetchDocuments = (docCollection: string, search = null, uid = null) => {
   const [documents, setDocuments] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [cancelled, setCancelled] = useState(false);
 
   useEffect(() => {
-    const loadData = async () => {
+    async function loadData() {
+      if (cancelled) {
+        return;
+      }
+
       setLoading(true);
 
+      const collectionRef = await collection(db, docCollection);
+
       try {
-        const collectionRef = collection(db, docCollection);
-        let queryRef = await query(collectionRef, orderBy("createdAt", "desc"));
+        let q;
+
         if (search) {
-          queryRef = await query(
+          q = await query(
             collectionRef,
-            orderBy("createdAt", "desc"),
-            where("tags", "array-contains", search)
+            where("tags", "array-contains", search),
+            orderBy("created_at", "desc")
           );
+        } else if (uid) {
+          q = await query(
+            collectionRef,
+            where("uid", "==", uid),
+            orderBy("created_at", "desc")
+          );
+        } else {
+          q = await query(collectionRef, orderBy("created_at", "desc"));
         }
 
-        await onSnapshot(queryRef, (querySnapshot) => {
+        await onSnapshot(q, (querySnapshot) => {
           setDocuments(
             querySnapshot.docs.map((doc) => ({
               id: doc.id,
@@ -42,14 +53,21 @@ export const useFetchDocuments = (
           );
         });
       } catch (error: any) {
-        console.error("Error fetching documents: ", error.message);
+        console.log(error);
         setError(error.message);
-        setLoading(false);
       }
-    };
+
+      setLoading(false);
+    }
 
     loadData();
-  }, [docCollection, search, uid]);
+  }, [docCollection, search, uid, cancelled]);
+
+  console.log(documents);
+
+  useEffect(() => {
+    return () => setCancelled(true);
+  }, []);
 
   return { documents, loading, error };
 };
