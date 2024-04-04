@@ -6,7 +6,7 @@ export interface IDocument {
     uid: string;
     createdBy: string;
     tags: Array<string>
-    id?: string
+    id: string
   }
   
   export interface IAction {

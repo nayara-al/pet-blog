@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, createContext, ReactNode } from "react";
 import { IContext, initialValueContext } from "../interface/context";
