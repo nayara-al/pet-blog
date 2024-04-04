@@ -1,0 +1,32 @@
+.post_container {
+    max-width: 450px;
+    background-color: white;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: .5rem .25rem 1rem rgba(0, 0, 0, 0.418);
+}
+
+.post_container img {
+    width: 100%;
+    height: auto;
+    border-radius: .5rem;
+}
+
+.post_container h3 {
+    margin-bottom: 0.2em;
+}
+
+.post_container .tags {
+    display: flex;
+    justify-content: center;
+}
+
+.tags p {
+    margin-right: 1em;
+}
+
+.tags span {
+    font-weight: bold;
+}
