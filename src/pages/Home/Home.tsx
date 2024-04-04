@@ -5,7 +5,7 @@ import styles from "./Home.module.css";
 import { FormFieldText } from "../../components";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { IDocument } from "../../interface/database";
-import PostDetail from "../../components/Post/PostDetail";
+import PostDetail from "../../components/PostDetail/PostDetail";
 
 export default function Home() {
   const { documents: posts, loading } = useFetchDocuments("posts");
@@ -48,10 +48,17 @@ export default function Home() {
             </div>
           ) : (
             posts.map((post: IDocument) => (
-              <PostDetail key={post.id} createdBy={post.createdBy} id={post.uid} imgSrc={post.imageUrl} tags={post.tags} title={post.title}/>
-              ))
-              )
-              ) : null}
+              <PostDetail
+                key={post.id}
+                createdBy={post.createdBy}
+                id={post.id}
+                imgSrc={post.imageUrl}
+                tags={post.tags}
+                title={post.title}
+              />
+            ))
+          )
+        ) : null}
       </div>
     </div>
   );

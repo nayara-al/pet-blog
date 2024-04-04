@@ -35,8 +35,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link to="/procurar" className={styles.linkHeader}>
-                Pesquisar
+              <Link to="/dashboard" className={styles.linkHeader}>
+                Dashboard
               </Link>
             </li>
             <li className={styles.itemList}>
