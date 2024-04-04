@@ -7,10 +7,14 @@ export default function Dashboard() {
   const { user } = useAuthValue();
   const uid = user!.uid;
   const { documents: posts } = useFetchDocuments("posts", null, uid);
+
+  const deleteDocument = (id: string) => {
+    console.log("Tem certeza que deseja deletar os post de id: ", id)
+  }
   return (
     <div className={style.dashboard}>
       <h1>Dashboard</h1>
-      <p>Gerencie seus posts</p>
+      <p className={style.description}>Gerencie seus posts</p>
       {posts && posts.length === 0 ? (
         <div className={style.noposts}>
           <p>Não foram encontrados posts</p>
@@ -29,14 +33,15 @@ export default function Dashboard() {
           <div className={style.post_row} key={post.id}>
             <p>{post.title}</p>
             <div className={style.actions}>
-              <Link to={`/post/${post.id}`} className="btn btn-outline">
+              <Link to={`/post/${post.id}`} className={style['btn-outline']}>
                 Ver
               </Link>
-              <Link to={`/post/edit/${post.id}`} className="btn btn-outline">
+              <Link to={`/post/edit/${post.id}`} className={style['btn-outline']}>
                 Editar
               </Link>
               <button
-                className="btn btn-outline btn-danger"
+                className={style['btn-danger']}
+                onClick={() => deleteDocument(post.id)}
               >
                 Excluir
               </button>

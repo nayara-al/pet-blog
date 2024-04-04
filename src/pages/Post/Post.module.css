@@ -6,6 +6,9 @@
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: .5rem .25rem 1rem rgba(0, 0, 0, 0.418);
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
 }
 
 .post_container img {
