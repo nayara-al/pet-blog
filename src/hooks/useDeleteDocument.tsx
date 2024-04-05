@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from "../firebase/config";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { IAction, IDocument } from "../interface/database";
+import { doc, deleteDoc } from "firebase/firestore";
+import { IAction } from "../interface/database";
 import { useEffect, useReducer, useState } from "react";
 
 interface IInitialState {
@@ -14,11 +14,11 @@ const initialState: IInitialState = {
   error: null,
 };
 
-const insertReducer = (state: IInitialState, action: IAction) => {
+const deleteReducer = (state: IInitialState, action: IAction) => {
   switch (action.type) {
     case "LOADING":
       return { loading: true, error: null };
-    case "INSERTED_DOC":
+    case "DELETED_DOC":
       return { loading: false, error: null };
     case "ERROR":
       return { loading: false, error: action.payload };
@@ -27,27 +27,27 @@ const insertReducer = (state: IInitialState, action: IAction) => {
   }
 };
 
-export const useInsertData = (docCollection: string) => {
-  const [response, dispatch] = useReducer(insertReducer, initialState);
+export const useDeleteDocument = (docCollection: string) => {
+  const [response, dispatch] = useReducer(deleteReducer, initialState);
 
   const [cancelled, setCancelled] = useState<boolean>(false);
 
-  const checkCancelled = (action: IAction) => {
+  const checkCancelBeforeDispatch = (action: IAction) => {
     if (!cancelled) {
       return;
     } else dispatch(action);
   };
 
-  const insertDocument = async (document: IDocument) => {
-    checkCancelled({
+  const deleteDocument = async (id: string) => {
+    checkCancelBeforeDispatch({
       type: "LOADING",
     });
 
     try {
-      const newData = { ...document, created_at: Timestamp.now() };
-      await addDoc(collection(db, docCollection), newData);
-      checkCancelled({
-        type: "INSERT_DOC",
+      const deletedDocument = await deleteDoc(doc(db, docCollection, id));
+      checkCancelBeforeDispatch({
+        type: "DELETED_DOC",
+        payload: deletedDocument,
       });
     } catch (error: any) {
       console.log(error.message);
@@ -58,5 +58,5 @@ export const useInsertData = (docCollection: string) => {
     return () => setCancelled(true);
   }, []);
 
-  return { insertDocument, response };
+  return { deleteDocument, response };
 };
