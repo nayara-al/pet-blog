@@ -6,7 +6,7 @@ interface PostProps {
   title: string;
   createdBy: string;
   tags: string[];
-  id: string;
+  id?: string;
 }
 export default function PostDetail({
   imgSrc,
