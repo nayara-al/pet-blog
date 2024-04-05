@@ -30,7 +30,6 @@ export default function FormLogin() {
     }
   };
   useEffect(() => {
-    console.log(authError);
     if (authError) {
       setError(authError);
     }

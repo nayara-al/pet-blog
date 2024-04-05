@@ -9,7 +9,6 @@ import PostDetail from "../../components/PostDetail/PostDetail";
 
 export default function Home() {
   const { documents: posts, loading } = useFetchDocuments("posts");
-  console.log("posts: ", posts);
   const navigate = useNavigate();
 
   const [query, setQuery] = useState("");
@@ -51,7 +50,6 @@ export default function Home() {
               <PostDetail
                 key={post.id}
                 createdBy={post.createdBy}
-                id={post.id}
                 imgSrc={post.imageUrl}
                 tags={post.tags}
                 title={post.title}

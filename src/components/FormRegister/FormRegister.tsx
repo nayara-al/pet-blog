@@ -29,7 +29,6 @@ export default function FormRegister() {
       setError("As senhas não conferem");
     }
 
-    console.log(userRegister);
     try {
       await createUser(userRegister);
       navigate("/login")

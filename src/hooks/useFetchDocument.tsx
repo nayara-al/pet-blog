@@ -18,7 +18,6 @@ export const useFetchDocument = (docCollection: string, id: string) => {
 
         setDocument(docSnap.data());
       } catch (error: any) {
-        console.log(error);
         setError(error.message);
       }
 
@@ -27,8 +26,6 @@ export const useFetchDocument = (docCollection: string, id: string) => {
 
     loadDocument();
   }, [docCollection, id]);
-
-  console.log(document);
 
   return { document, loading, error };
 };

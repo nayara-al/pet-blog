@@ -6,7 +6,6 @@ export default function Header() {
   const { logout } = useAuthentication();
   const navigate = useNavigate();
   const handleSignOut = () => {
-    console.log("tentando logout");
     try {
       logout();
       navigate("/login");

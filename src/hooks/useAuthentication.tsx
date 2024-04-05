@@ -43,7 +43,6 @@ export const useAuthentication = () => {
 
       return user;
     } catch (error: any) {
-      console.log(error.message);
 
       let systemErrorMessage: string;
 
@@ -74,7 +73,6 @@ export const useAuthentication = () => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
     } catch (error: any) {
-      console.log(error.message);
 
       let systemErrorMessage: string;
 
@@ -92,6 +90,26 @@ export const useAuthentication = () => {
     setLoading(false);
   };
 
+  const updateUserProfile = async (displayName: string) => {
+    checkIfIsCancelled();
+    setLoading(true);
+
+    try {
+      const user = auth.currentUser;
+      if (user) {
+        await updateProfile(user, {
+          displayName: displayName,
+        });
+      } else {
+        throw new Error("Usuário não autenticado.");
+      }
+    } catch (error: any) {
+      setError("Ocorreu um erro ao atualizar o perfil do usuário.");
+    }
+
+    setLoading(false);
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -103,5 +121,6 @@ export const useAuthentication = () => {
     logout,
     login,
     loading,
+    updateUserProfile
   };
 };
