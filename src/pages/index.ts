@@ -6,6 +6,7 @@ import CreatePost from "./CreatePost/CreatePost";
 import Search from "./Search/Search";
 import Dashboard from "./Dashboard/Dashboard";
 import Post from "./Post/Post";
+import EditPost from "./EditPost/EditPost";
 
 export {
     Home,
@@ -15,5 +16,6 @@ export {
     CreatePost,
     Search,
     Dashboard,
-    Post
+    Post,
+    EditPost,
 }
