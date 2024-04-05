@@ -33,11 +33,6 @@ export default function Header() {
                 Sobre
               </Link>
             </li>
-            <li>
-              <Link to="/dashboard" className={styles.linkHeader}>
-                Dashboard
-              </Link>
-            </li>
             <li className={styles.itemList}>
               <button className={styles.btnHeader} onClick={handleSignOut}>
                 <p className={styles.btnParagraph}>Sair</p>

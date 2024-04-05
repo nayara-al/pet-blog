@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
-import { House, User, PlusSquare } from "@phosphor-icons/react";
+import { House, PlusSquare, ListDashes } from "@phosphor-icons/react";
 import { useAuthentication } from "../../../hooks/useAuthentication";
 export default function Footer() {
   const { auth } = useAuthentication();
@@ -15,8 +15,8 @@ export default function Footer() {
           <Link to="/">
             <House size={40} color="white" weight="fill" />
           </Link>
-          <Link to="/about">
-            <User size={40} color="white" weight="fill" />
+          <Link to="/dashboard">
+            <ListDashes size={40} color="white" weight="fill" />
           </Link>
           <Link to="/criar-post">
             <PlusSquare size={40} color="white" weight="fill" />
