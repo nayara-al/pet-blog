@@ -100,3 +100,41 @@
 a {
     text-decoration: none;
 }
+
+.displayName {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.btn-edit {
+    background-color: var(--laranja);
+    padding: .5rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.displayNameEdit {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.displayNameEdit input {
+    padding: 0.3rem 1rem;
+    border-radius: .25rem;
+}
+
+.displayNameEdit button {
+    background-color: var(--azul-escuro);
+    padding: .5rem;
+    border-radius: 100%;
+    cursor: pointer;
+}
