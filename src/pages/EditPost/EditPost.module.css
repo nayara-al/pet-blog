@@ -1,0 +1,50 @@
+.editPost,
+.form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    background-color: var(--marrom);
+    color: white;
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, .15);
+}
+
+.editPost {
+    gap: 2rem;
+    color: var(--azul-escuro);
+}
+
+.labelImg {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.spanTitle {
+    font-size: .75rem;
+    color: black;
+    padding: .5rem 1rem;
+    overflow: hidden;
+    background-color: var(--azul-claro);
+    border-radius: .25rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, .15);
+}
+
+.labelImg input {
+    display: none;
+}
+
+.spanTrash {
+    background-color: transparent;
+    width: fit-content;
+    color: var(--laranja);
+}
